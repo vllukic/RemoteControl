@@ -74,6 +74,7 @@ import com.android.build.OutputFile
  *   extraPackagerArgs: []
  * ]
  */
+apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 
 project.ext.react = [
     entryFile: "index.js",
@@ -185,9 +186,14 @@ android {
         pickFirst '**/x86/libjsc.so'
         pickFirst '**/armeabi-v7a/libjsc.so'
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
+    addUnimodulesDependencies()
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
